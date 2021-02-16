@@ -2,6 +2,7 @@
 Django admin pages for edx-username-changer plugin
 """
 
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 
@@ -21,7 +22,7 @@ class UserAdmin(BaseUserAdmin):
         It will remove 'username' from readonly field to make it editable through admin panel
         """
         readonly_fields = super(UserAdmin, self).get_readonly_fields(request, obj)
-        if obj:
+        if settings.FEATURES.get('ENABLE_EDX_USERNAME_CHANGER') and obj:
             return tuple([name for name in readonly_fields if name != "username"])
         return readonly_fields
 
