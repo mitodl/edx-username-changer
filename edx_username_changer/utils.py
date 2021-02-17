@@ -8,8 +8,12 @@ from django.db import transaction
 from social_django.models import UserSocialAuth
 
 from common.djangoapps.student.models import CourseEnrollment
-from openedx.core.djangoapps.django_comment_common.comment_client.utils import perform_request as perform_forum_request
-from openedx.core.djangoapps.django_comment_common.comment_client.user import User as CommentUser
+from openedx.core.djangoapps.django_comment_common.comment_client.utils import (
+    perform_request as perform_forum_request,
+)
+from openedx.core.djangoapps.django_comment_common.comment_client.user import (
+    User as CommentUser,
+)
 from openedx.core.djangoapps.django_comment_common.comment_client.thread import Thread
 from openedx.core.djangoapps.django_comment_common.comment_client.comment import Comment
 
@@ -21,10 +25,11 @@ COMMENT_TYPE = "comment"
 THREAD_TYPE = "thread"
 
 
-class EdxUsernameChanger():
+class EdxUsernameChanger:
     """
     Execeptions for edx-username-changer plugin
     """
+
     def __init__(self, old_username, new_username):
         self.old_username = old_username
         self.new_username = new_username
@@ -37,7 +42,9 @@ class EdxUsernameChanger():
         comment_user = CommentUser.from_django_user(user)
         update_comment_user_username(comment_user, self.new_username)
         enrolled_course_ids = get_enrolled_course_ids(user)
-        authored_items = get_authored_threads_and_comments(comment_user, enrolled_course_ids)
+        authored_items = get_authored_threads_and_comments(
+            comment_user, enrolled_course_ids
+        )
 
         for authored_item in authored_items:
             item_id = authored_item["id"]
@@ -53,7 +60,9 @@ class EdxUsernameChanger():
         iff uid is based upon username else doesn't make any effect
         """
         with transaction.atomic():
-            UserSocialAuth.objects.filter(uid=self.old_username).update(uid=self.new_username)
+            UserSocialAuth.objects.filter(uid=self.old_username).update(
+                uid=self.new_username
+            )
 
 
 def get_enrolled_course_ids(user):
@@ -73,8 +82,12 @@ def get_authored_threads_and_comments(comment_user, course_ids):
     """
     for course_id in course_ids:
         involved_threads = [
-            Thread.find(id=thread["id"]).retrieve(with_responses=True, recursive=True, mark_as_read=False)
-            for thread in Thread.search({"course_id": course_id, "user_id": comment_user.id}).collection
+            Thread.find(id=thread["id"]).retrieve(
+                with_responses=True, recursive=True, mark_as_read=False
+            )
+            for thread in Thread.search(
+                {"course_id": course_id, "user_id": comment_user.id}
+            ).collection
         ]
         for thread in involved_threads:
             if thread["user_id"] == comment_user.id:
@@ -127,6 +140,3 @@ def update_comment_username(comment_id, new_username):
     )
     if response_data[u"username"] != new_username:
         raise UpdateFailedException(url=comment_detail_url, new_username=new_username)
-
-
-

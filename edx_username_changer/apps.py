@@ -6,7 +6,7 @@ from django.apps import AppConfig
 
 
 class EdxUsernameChangerConfig(AppConfig):
-    name = 'edx_username_changer'
+    name = "edx_username_changer"
     verbose_name = "Open edX Username Changer"
 
     def ready(self):

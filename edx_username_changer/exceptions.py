@@ -2,6 +2,7 @@
 Execeptions for edx-username-changer plugin
 """
 
+
 class UpdateFailedException(Exception):
     def __init__(self, url, new_username):
         self.url = url
