@@ -56,8 +56,8 @@ class EdxUsernameChanger:
 
     def update_user_social_auth_uid(self):
         """
-        Changes uid in django-social-auth for oauth based user accounts
-        iff uid is based upon username else doesn't make any effect
+        Changes uid in django-social-auth for OAuth based user accounts
+        iff uid is based on username otherwise it doesn't make any effect
         """
         with transaction.atomic():
             UserSocialAuth.objects.filter(uid=self.old_username).update(

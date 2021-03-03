@@ -28,7 +28,7 @@ def user_pre_save_callback(sender, **kwargs):
 @receiver(post_save, sender=User)
 def user_post_save_callback(sender, **kwargs):
     """
-    Post-save signal handler of User model to update usernames throughout application
+    Post-save signal handler of User model to update username throughout the application
     """
     if settings.FEATURES.get("ENABLE_EDX_USERNAME_CHANGER"):
         user = kwargs["instance"]

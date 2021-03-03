@@ -19,9 +19,9 @@ class UserAdmin(BaseUserAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         """
-        It will remove 'username' from readonly field to make it editable through admin panel
+        It will remove 'username' from the read-only fields to make it editable through the admin panel
         """
-        readonly_fields = super(UserAdmin, self).get_readonly_fields(request, obj)
+        readonly_fields = super().get_readonly_fields(request, obj)
         if settings.FEATURES.get("ENABLE_EDX_USERNAME_CHANGER") and obj:
             return tuple([name for name in readonly_fields if name != "username"])
         return readonly_fields

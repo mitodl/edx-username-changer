@@ -9,7 +9,7 @@ class UpdateFailedException(Exception):
         self.new_username = new_username
 
     def __str__(self):
-        return "Username update failed (username update attempted: {}, url: {})".format(
+        return "Username update failed for username: {}, url: {})".format(
             self.new_username,
             self.url,
         )
