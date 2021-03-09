@@ -30,4 +30,12 @@ setuptools.setup(
     url="https://github.com/mitodl/edx-username-changer.git",
     packages=setuptools.find_packages(),
     python_requires=">=3.6",
+    entry_points={
+        "lms.djangoapp": [
+            "edx_username_changer = edx_username_changer.apps:EdxUsernameChangerConfig",
+        ],
+        "cms.djangoapp": [
+            "edx_username_changer = edx_username_changer.apps:EdxUsernameChangerConfig",
+        ],
+    }
 )

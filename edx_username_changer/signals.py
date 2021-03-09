@@ -4,7 +4,6 @@ Signals and Signal Handlers for edx-username-changer plugin
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 from common.djangoapps.util.model_utils import get_changed_fields_dict
@@ -12,7 +11,6 @@ from common.djangoapps.util.model_utils import get_changed_fields_dict
 from edx_username_changer.utils import EdxUsernameChanger
 
 
-@receiver(pre_save, sender=User)
 def user_pre_save_callback(sender, **kwargs):
     """
     Pre-save signal handler of User model to store changed fields to be used later
@@ -25,7 +23,6 @@ def user_pre_save_callback(sender, **kwargs):
             user._updated_fields = fields_to_update
 
 
-@receiver(post_save, sender=User)
 def user_post_save_callback(sender, **kwargs):
     """
     Post-save signal handler of User model to update username throughout the application

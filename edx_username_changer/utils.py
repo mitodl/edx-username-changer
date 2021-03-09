@@ -70,9 +70,7 @@ def get_enrolled_course_ids(user):
     Returns course ids of all the active enrollments of the provided user
     """
     return [
-        str(enrollment.course_id)
-        for enrollment in CourseEnrollment.enrollments_for_user(user)
-        if enrollment.is_active is True
+        str(enrollment.course_id) for enrollment in CourseEnrollment.enrollments_for_user(user)
     ]
 
 
