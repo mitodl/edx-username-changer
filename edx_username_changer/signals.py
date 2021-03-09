@@ -8,7 +8,8 @@ from django.dispatch import receiver
 
 from common.djangoapps.util.model_utils import get_changed_fields_dict
 
-from edx_username_changer.utils import EdxUsernameChanger
+from edx_username_changer.utils import update_user_social_auth_uid
+from edx_username_changer.tasks import task_update_username_in_forum
 
 
 def user_pre_save_callback(sender, **kwargs):
@@ -34,9 +35,7 @@ def user_post_save_callback(sender, **kwargs):
             and user._updated_fields
             and {"username", "new_username"}.issubset(user._updated_fields)
         ):
-            username_changer = EdxUsernameChanger(
-                user._updated_fields["username"], user._updated_fields["new_username"]
-            )
-            username_changer.update_user_social_auth_uid()
-            username_changer.update_username_in_forum()
+            task_update_username_in_forum.delay(user._updated_fields["new_username"])
+            update_user_social_auth_uid(user._updated_fields["username"], user._updated_fields["new_username"])
+
             delattr(user, "_updated_fields")

@@ -18,18 +18,9 @@ To get the latest commit from GitHub
 pip install -e git+https://github.com/mitodl/edx-username-changer.git@master#egg=edx-username-changer
 ```
 # Configuring Plugin into Open edX
-To configure this plugin, you need to do the following two steps:
+To configure this plugin, you need to do the following one step:
 
-1) Add the plugin name into INSTALLED_APPS of your Open edX instance (through production.py or common.py)
-```bash
-INSTALLED_APPS = [
-  ...
-  ...
-  "edx_username_changer",
-  ...
-]
-```
-2) Add/Enable a feature flag (ENABLE_EDX_USERNAME_CHANGER) into your environment variables (through lms.yml or studio.yml, depending upon where you are installing the plugin)
+1) Add/Enable a feature flag (ENABLE_EDX_USERNAME_CHANGER) into your environment variables (through lms.yml or studio.yml, depending upon where you are installing the plugin)
 ```bash
 FEATURES:
   ...

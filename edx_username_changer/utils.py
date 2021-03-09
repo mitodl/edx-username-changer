@@ -11,9 +11,6 @@ from common.djangoapps.student.models import CourseEnrollment
 from openedx.core.djangoapps.django_comment_common.comment_client.utils import (
     perform_request as perform_forum_request,
 )
-from openedx.core.djangoapps.django_comment_common.comment_client.user import (
-    User as CommentUser,
-)
 from openedx.core.djangoapps.django_comment_common.comment_client.thread import Thread
 from openedx.core.djangoapps.django_comment_common.comment_client.comment import Comment
 
@@ -21,48 +18,17 @@ from edx_username_changer.exceptions import UpdateFailedException
 
 
 User = get_user_model()
-COMMENT_TYPE = "comment"
-THREAD_TYPE = "thread"
 
 
-class EdxUsernameChanger:
+def update_user_social_auth_uid(old_username, new_username):
     """
-    Execeptions for edx-username-changer plugin
+    Changes uid in django-social-auth for OAuth based user accounts
+    iff uid is based on username otherwise it doesn't make any effect
     """
-
-    def __init__(self, old_username, new_username):
-        self.old_username = old_username
-        self.new_username = new_username
-
-    def update_username_in_forum(self):
-        """
-        Changes username in Discussion-Forum service
-        """
-        user = User.objects.get(username=self.new_username)
-        comment_user = CommentUser.from_django_user(user)
-        update_comment_user_username(comment_user, self.new_username)
-        enrolled_course_ids = get_enrolled_course_ids(user)
-        authored_items = get_authored_threads_and_comments(
-            comment_user, enrolled_course_ids
+    with transaction.atomic():
+        UserSocialAuth.objects.filter(uid=old_username).update(
+            uid=new_username
         )
-
-        for authored_item in authored_items:
-            item_id = authored_item["id"]
-            item_type = str(authored_item.get("type"))
-            if item_type == THREAD_TYPE:
-                update_thread_username(item_id, self.new_username)
-            elif item_type == COMMENT_TYPE:
-                update_comment_username(item_id, self.new_username)
-
-    def update_user_social_auth_uid(self):
-        """
-        Changes uid in django-social-auth for OAuth based user accounts
-        iff uid is based on username otherwise it doesn't make any effect
-        """
-        with transaction.atomic():
-            UserSocialAuth.objects.filter(uid=self.old_username).update(
-                uid=self.new_username
-            )
 
 
 def get_enrolled_course_ids(user):
