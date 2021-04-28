@@ -1,7 +1,7 @@
 """
 This file contains celery tasks related to edx_username_changer plugin.
 """
-from celery import task
+from celery import shared_task
 
 from django.contrib.auth import get_user_model
 
@@ -23,7 +23,7 @@ THREAD_TYPE = "thread"
 User = get_user_model()
 
 
-@task()
+@shared_task()
 def task_update_username_in_forum(username):
     """
     Changes username in Discussion-Forum service
