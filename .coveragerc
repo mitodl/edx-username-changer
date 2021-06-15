@@ -1,0 +1,10 @@
+[run]
+branch = True
+data_file = .coverage
+source=edx_username_changer
+omit =
+    test_settings
+    *migrations*
+    *admin.py
+    *static*
+    *templates*

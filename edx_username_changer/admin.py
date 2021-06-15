@@ -6,7 +6,10 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 
-from common.djangoapps.student.admin import UserAdmin as BaseUserAdmin
+# pylint: disable=import-error
+from common.djangoapps.student.admin import (
+    UserAdmin as BaseUserAdmin,
+)
 
 
 User = get_user_model()
@@ -23,12 +26,14 @@ class UserAdmin(BaseUserAdmin):
         """
         readonly_fields = super().get_readonly_fields(request, obj)
         if settings.FEATURES.get("ENABLE_EDX_USERNAME_CHANGER") and obj:
+            # pylint: disable=consider-using-generator
             return tuple([name for name in readonly_fields if name != "username"])
         return readonly_fields
 
 
 # We must first un-register the User model since it was registered by edX's core code.
 try:
+    # pylint: disable=undefined-variable
     admin.site.unregister(User)
 except NotRegistered:
     pass
