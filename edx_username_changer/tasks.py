@@ -1,11 +1,11 @@
 """
 This file contains celery tasks related to edx_username_changer plugin.
 """
-from celery import shared_task
+from celery import shared_task  # pylint: disable=import-error
 
 from django.contrib.auth import get_user_model
 
-from openedx.core.djangoapps.django_comment_common.comment_client.user import (
+from openedx.core.djangoapps.django_comment_common.comment_client.user import (  # pylint: disable=import-error
     User as CommentUser,
 )
 

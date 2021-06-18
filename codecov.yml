@@ -1,0 +1,13 @@
+coverage:
+  status:
+    project:
+      default:
+        enabled: yes
+    patch:
+      default:
+        enabled: yes
+
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: false
