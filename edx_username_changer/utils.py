@@ -77,9 +77,9 @@ def update_comment_user_username(comment_user, new_username):
     response_data = perform_forum_request(
         "put",
         user_detail_url,
-        data_or_params={u"username": new_username},
+        data_or_params={"username": new_username},
     )
-    if response_data[u"username"] != new_username:
+    if response_data["username"] != new_username:
         raise UpdateFailedException(url=user_detail_url, new_username=new_username)
 
 
@@ -91,9 +91,9 @@ def update_thread_username(thread_id, new_username):
     response_data = perform_forum_request(
         "put",
         thread_detail_url,
-        data_or_params={u"username": new_username},
+        data_or_params={"username": new_username},
     )
-    if response_data[u"username"] != new_username:
+    if response_data["username"] != new_username:
         raise UpdateFailedException(url=thread_detail_url, new_username=new_username)
 
 
@@ -105,7 +105,7 @@ def update_comment_username(comment_id, new_username):
     response_data = perform_forum_request(
         "put",
         comment_detail_url,
-        data_or_params={u"username": new_username},
+        data_or_params={"username": new_username},
     )
-    if response_data[u"username"] != new_username:
+    if response_data["username"] != new_username:
         raise UpdateFailedException(url=comment_detail_url, new_username=new_username)
