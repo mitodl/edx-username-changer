@@ -1,6 +1,11 @@
 Release Notes
 =============
 
+Version 0.2.1
+-------------
+
+- Add support for django3.2 LTS (#9)
+
 Version 0.2.0 (Released June 23, 2021)
 -------------
 
