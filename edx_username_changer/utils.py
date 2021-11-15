@@ -45,23 +45,42 @@ def get_enrolled_course_ids(user):
     ]
 
 
-def get_authored_threads_and_comments(comment_user, course_ids):
+def get_involved_threads(course_id, user_id):
     """
-    Returns an iterator of all the discussion-forum threads and comments of provided user and course
+    Returns an iterator of all the discussion-forum threads against provided user and course
     """
-    for course_id in course_ids:
+    page = 0
+    involved_threads = []
+    while len(involved_threads) > 0 or page == 0:
         involved_threads = [
             Thread.find(id=thread["id"]).retrieve(
                 with_responses=True, recursive=True, mark_as_read=False
             )
             for thread in Thread.search(
-                {"course_id": course_id, "user_id": comment_user.id}
+                {"course_id": course_id, "user_id": user_id, "page": page}
             ).collection
         ]
+        yield from involved_threads
+        page += 1
+
+
+def get_authored_threads_and_comments(comment_user, enrolled_course_ids):
+    """
+    Returns an iterator of all the discussion-forum threads and comments of provided user and course
+    """
+
+    for course_id in enrolled_course_ids:
+        involved_threads = get_involved_threads(course_id, comment_user.id)
         for thread in involved_threads:
             if thread["user_id"] == comment_user.id:
                 yield thread.to_dict()
-            children_to_scan = thread["children"]
+
+            children_to_scan = (
+                thread.get("children", [])
+                + thread.get("endorsed_responses", [])
+                + thread.get("non_endorsed_responses", [])
+            )
+
             while children_to_scan:
                 child = children_to_scan.pop(0)
                 children_to_scan.extend(child["children"])
