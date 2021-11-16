@@ -1,7 +1,7 @@
 Release Notes
 =============
 
-Version 0.3.0
+Version 0.3.0 (Released November 16, 2021)
 -------------
 
 - fix: pagination incorporation & comment username fix on question (#12)
