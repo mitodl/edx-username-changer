@@ -6,8 +6,8 @@
 #
 asgiref==3.4.1
     # via django
-django==3.2.8
-    # via -r requirements/base.in
+django==3.2.15
+    # via -r base.in
 pytz==2021.3
     # via django
 sqlparse==0.4.2
