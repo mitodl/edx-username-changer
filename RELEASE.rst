@@ -1,6 +1,12 @@
 Release Notes
 =============
 
+Version 0.3.1
+-------------
+
+- Bump pip from 20.3.3 to 21.1 in /requirements (#14)
+- Bump django from 3.2.8 to 3.2.16 in /requirements (#20)
+
 Version 0.3.0 (Released November 16, 2021)
 -------------
 
