@@ -1,7 +1,7 @@
 Release Notes
 =============
 
-Version 0.3.1
+Version 0.3.1 (Released November 04, 2022)
 -------------
 
 - Bump pip from 20.3.3 to 21.1 in /requirements (#14)
