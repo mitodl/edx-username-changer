@@ -4,14 +4,14 @@
 #
 #    make upgrade
 #
-backports.entry-points-selectable==1.1.0
+backports-entry-points-selectable==1.1.0
     # via virtualenv
-certifi==2021.5.30
+certifi==2022.12.7
     # via requests
 charset-normalizer==2.0.6
     # via requests
 codecov==2.1.12
-    # via -r requirements/ci.in
+    # via -r ci.in
 coverage==6.0.1
     # via codecov
 distlib==0.3.3
@@ -41,7 +41,7 @@ six==1.16.0
 toml==0.10.2
     # via tox
 tox==3.24.4
-    # via -r requirements/ci.in
+    # via -r ci.in
 urllib3==1.26.7
     # via requests
 virtualenv==20.8.1
