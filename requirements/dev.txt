@@ -262,7 +262,7 @@ virtualenv==20.8.1
     # via
     #   -r ci.txt
     #   tox
-wheel==0.37.0
+wheel==0.38.1
     # via
     #   -r pip-tools.txt
     #   pip-tools
