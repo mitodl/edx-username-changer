@@ -5,9 +5,7 @@
 #    make upgrade
 #
 asgiref==3.4.1
-    # via
-    #   -r test.txt
-    #   django
+    # via -r test.txt
 astroid==2.8.2
     # via
     #   pylint
@@ -35,7 +33,6 @@ coverage[toml]==6.0.1
     # via
     #   -r test.txt
     #   pytest-cov
-django==3.2.16
 edx-lint==5.2.0
     # via -r quality.in
 iniconfig==1.1.1
@@ -116,9 +113,7 @@ python-slugify==5.0.2
     #   -r test.txt
     #   code-annotations
 pytz==2021.3
-    # via
-    #   -r test.txt
-    #   django
+    # via -r test.txt
 pyyaml==5.4.1
     # via
     #   -r test.txt
@@ -130,9 +125,7 @@ six==1.16.0
 snowballstemmer==2.1.0
     # via pydocstyle
 sqlparse==0.4.2
-    # via
-    #   -r test.txt
-    #   django
+    # via -r test.txt
 stevedore==3.4.0
     # via
     #   -r test.txt

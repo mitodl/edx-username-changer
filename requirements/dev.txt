@@ -5,9 +5,7 @@
 #    make upgrade
 #
 asgiref==3.4.1
-    # via
-    #   -r quality.txt
-    #   django
+    # via -r quality.txt
 astroid==2.8.2
     # via
     #   -r quality.txt
@@ -64,8 +62,6 @@ distlib==0.3.3
     # via
     #   -r ci.txt
     #   virtualenv
-django==3.2.16
-    # via -r quality.txt
 edx-lint==5.2.0
     # via -r quality.txt
 filelock==3.3.0
@@ -196,9 +192,7 @@ python-slugify==5.0.2
     #   -r quality.txt
     #   code-annotations
 pytz==2021.3
-    # via
-    #   -r quality.txt
-    #   django
+    # via -r quality.txt
 pyyaml==5.4.1
     # via
     #   -r quality.txt
@@ -223,9 +217,7 @@ snowballstemmer==2.1.0
     #   -r quality.txt
     #   pydocstyle
 sqlparse==0.4.2
-    # via
-    #   -r quality.txt
-    #   django
+    # via -r quality.txt
 stevedore==3.4.0
     # via
     #   -r quality.txt
