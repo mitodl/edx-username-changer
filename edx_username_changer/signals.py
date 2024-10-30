@@ -3,6 +3,7 @@ Signals and Signal Handlers for edx-username-changer plugin
 """
 
 from django.conf import settings
+from django.db import transaction
 
 from common.djangoapps.util.model_utils import (  # pylint: disable=import-error
     get_changed_fields_dict,
@@ -36,9 +37,10 @@ def user_post_save_callback(sender, **kwargs):
             and user._updated_fields
             and {"username", "new_username"}.issubset(user._updated_fields)
         ):
-            task_update_username_in_forum.delay(user._updated_fields["new_username"])
-            update_user_social_auth_uid(
-                user._updated_fields["username"], user._updated_fields["new_username"]
+            new_username = user._updated_fields["new_username"]
+            transaction.on_commit(
+                lambda: task_update_username_in_forum.delay(new_username)
             )
+            update_user_social_auth_uid(user._updated_fields["username"], new_username)
             # pylint: disable=literal-used-as-attribute
             delattr(user, "_updated_fields")
