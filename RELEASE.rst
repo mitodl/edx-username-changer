@@ -1,6 +1,11 @@
 Release Notes
 =============
 
+Version 0.3.2 (Released November 07, 2024)
+-------------
+- fix: wait for the transaction to be committed before getting the user with new username (#33)
+
+
 Version 0.3.1 (Released November 04, 2022)
 -------------
 
