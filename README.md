@@ -1,12 +1,8 @@
-# Repository Moved 🚨
+# ⛔️ DEPRECATION WARNING 🚨
 
-**This repository has been moved to a new location.**
-
-The new repository can be found at: [open-edx-plugins](https://github.com/mitodl/open-edx-plugins/tree/marslan/6381-edx-username-changer/src/edx_username_changer)
+**This repository is deprecated. Please see [open-edx-plugins](https://github.com/mitodl/open-edx-plugins/tree/marslan/6381-edx-username-changer/src/edx_username_changer) for all the future updates and development.**
 
 Please update your bookmarks and refer to the new repository for the latest updates and contributions.
-
-This repository is no longer actively maintained. All new updates, issues, and pull requests should be directed to the new repository.
 
 Thank you for your understanding! 🙌
 
