@@ -1,3 +1,11 @@
+# ⛔️ DEPRECATION WARNING 🚨
+
+**This repository is deprecated. Please see [open-edx-plugins](https://github.com/mitodl/open-edx-plugins/tree/main/src/edx_username_changer) for all the future updates and development.**
+
+Please update your bookmarks and refer to the new repository for the latest updates and contributions.
+
+Thank you for your understanding! 🙌
+
 # edx-username-changer
 A plugin to enable update usernames through admin panel in Open edX (and other apps that log into Open edX via OAuth). It only supports koa and latest releases of Open edX.
 
